@@ -8,11 +8,13 @@ class AppUserAdmin(admin.ModelAdmin): # 관리자 페이지에서 AppUser 모델
     list_display = ('id', 
                     'email', 
                     'display_name', 
-                    'auth_provider', 
+                    'auth_system', 
                     'external_auth_id', 
+                    'identity_provider',
+                    'external_auth_id',
                     'created_at', 
                     'updated_at')
-    list_filter = ('auth_provider','created_at', 'updated_at') # 리스트 필터링 옵션 
+    list_filter = ('auth_system','created_at', 'updated_at') # 리스트 필터링 옵션 
     search_fields = ('email', 'display_name', 'external_auth_id') # 검색 필드 옵션
 
     ordering = ('-created_at',) 

@@ -10,23 +10,38 @@ class TimeStampedModel(models.Model):
 
 # 사용자 모델
 class AppUser(TimeStampedModel):
-    
-    # auth provider 구분을 위한 Enum
-    class AuthProvider(models.TextChoices):
-        LOCAL = 'local', 'Local'
-        GOOGLE = 'google', 'Google'
+
+    class AuthSystem(models.TextChoices):
+        LOCAL = "local", "Local"
         SUPABASE = 'supabase', 'Supabase'
+        
 
     # 이메일 필드 추가, unique=True로 중복 방지
     email = models.EmailField(blank=True, null=True, unique=True)
     # display name 필드 추가
     display_name = models.CharField(max_length=100, blank=True)
-    # auth provider 필드 추가
-    auth_provider = models.CharField(max_length=20, 
-                                     choices=AuthProvider.choices, 
-                                     default=AuthProvider.LOCAL)
-    # 외부 인증 ID 필드 추가 (예: Google의 sub, Supabase의 user_id 등)
-    external_auth_id = models.CharField(max_length=255, blank=True, null=True)
+
+    
+    # 우리 시스템이 신뢰하는 인증 체계
+    auth_system = models.CharField(
+        max_length=20,
+        choices=AuthSystem.choices,
+        default=AuthSystem.LOCAL,
+    )
+
+    # 세부 로그인 수단: google, kakao, github, email, sso 등
+    identity_provider = models.CharField(
+        max_length=50,
+        blank=True,
+        default="",
+    )
+
+    # Supabase user id 또는 외부 auth 시스템의 고유 id
+    external_auth_id = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+    )
 
     # 관리자 페이지에서 이메일과 display name으로 사용자 식별 가능하도록 __str__ 메서드 수정
     def __str__(self):
