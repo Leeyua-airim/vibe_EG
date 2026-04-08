@@ -58,8 +58,8 @@ class PromptSession(TimeStampedModel):
     # 프롬프트 세션 상태를 위한 Enum (초기 상태는 RECEIVED, 이후 SPEC_GENERATING, SPEC_GENERATED, FAILED 등으로 변경)
     class Status(models.TextChoices):
         RECEIVED = 'received', 'Received' # 사용자의 프롬프트를 받은 상태
-        SPEC_GENERATING = 'spec_generating', 'Spec Generating' # LLM 기반 스팩 생성 중
-        SPEC_GENERATED = 'spec_generated', 'Spec Generated' # LLM 기반 스팩 생성 완료
+        PROCESSING = "processing", "Processing"# LLM 기반 스팩 생성 중
+        COMPLETED = "completed", "Completed"# LLM 기반 스팩 생성 완료
         FAILED = 'failed', 'Failed'
 
     # 사용자 외래키, 프롬프트 세션과 사용자 간의 관계 설정
@@ -122,7 +122,7 @@ class GeneratedApp(TimeStampedModel):
     prompt_session = models.ForeignKey(
         PromptSession,
         on_delete=models.CASCADE,
-        related_name='generated_specs'
+        related_name='generated_apps'
         )
     
     # 생성된 스펙의 이름 필드, 사용자가 지정한 앱 이름을 저장
