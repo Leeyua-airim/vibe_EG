@@ -1,6 +1,9 @@
 from django.urls import path
-from .views import health_check
+from .views import health_check, app_generator_generate_spec
 
 urlpatterns = [
     path(route='health/', view=health_check, name='health_check'),
+    path(route='app-generator/generate-spec',
+        view=app_generator_generate_spec, 
+        name='app_generator_generate_spec'),
     ]

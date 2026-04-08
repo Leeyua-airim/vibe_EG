@@ -14,3 +14,6 @@ __pycache__/
 # Node
 node_modules/
 dist/
+
+# static files
+apps/api/staticfiles/
