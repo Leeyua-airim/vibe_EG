@@ -139,8 +139,7 @@ class GeneratedApp(TimeStampedModel):
         choices=Status.choices,
         default=Status.DRAFT)
     
-    # 오리지널 프롬프트 텍스트 필드, 생성된 스펙의 원본 프롬프트를 저장
-    original_prompt = models.TextField()
+    
     # 생성된 스펙의 JSON 필드, 실제로 생성된 스펙의 상세 내용을 JSON 형태로 저장
     spec_json = models.JSONField(default=dict, blank=True)
 

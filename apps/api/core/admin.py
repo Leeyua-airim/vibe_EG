@@ -48,7 +48,6 @@ class GeneratedAppAdmin(admin.ModelAdmin): # 관리자 페이지에서 Generated
                     )
     search_fields = (
         "name",
-        "original_prompt",
         "project_root",
         "entry_file",
         "user__email",
