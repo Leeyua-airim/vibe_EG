@@ -62,9 +62,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database 
+# DATABASES = {
+#     'default' : dj_database_url.parse(
+#         os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
+#     )
+# }
+
+# database 변경 
 DATABASES = {
-    'default' : dj_database_url.parse(
-        os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
+    "default": dj_database_url.parse(
+        os.environ["DATABASE_URL"],
+        conn_max_age=600,
     )
 }
 

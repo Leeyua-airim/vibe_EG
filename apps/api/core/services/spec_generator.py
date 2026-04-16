@@ -17,8 +17,8 @@ APP_SPEC_JSON_SCHEMA = {
             },
             "summary": {
                 "type": "string",
-                "minLength": 1,
-                "maxLength": 300
+                "minLength": 100,
+                "maxLength": 500
             },
             "features": {
                 "type": "array",
@@ -26,8 +26,8 @@ APP_SPEC_JSON_SCHEMA = {
                 "maxItems": 6,
                 "items": {
                     "type": "string",
-                    "minLength": 1,
-                    "maxLength": 60
+                    "minLength": 30,
+                    "maxLength": 200
                 }
             },
             "inputs": {
@@ -155,7 +155,7 @@ def generate_app_spec_from_prompt(prompt: str) -> dict:
 
     t2 = time.perf_counter()
 
-    spec.setdefault("title", "생성 앱")
+    spec.setdefault("title", "생성 앱") # setdefault() 메서드를 사용하여 빈 값이 들어오는 경우 방지. 
     spec.setdefault("summary", "사용자 요청을 기반으로 생성된 앱입니다.")
     spec.setdefault("features", [])
     spec.setdefault("inputs", [])
