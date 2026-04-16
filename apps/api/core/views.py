@@ -9,8 +9,7 @@ from rest_framework.response import Response
 from core.models import AppUser, PromptSession, GeneratedApp, PromptEvent
 from core.serializers import GenerateSpecRequestSerializer
 from core.services.spec_generator import generate_app_spec_from_prompt 
-
-
+from core.services.workspace_builder import scaffold_generated_app
 # 로깅 설정
 logger = logging.getLogger(__name__)
 

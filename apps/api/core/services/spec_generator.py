@@ -17,8 +17,8 @@ APP_SPEC_JSON_SCHEMA = {
             },
             "summary": {
                 "type": "string",
-                "minLength": 100,
-                "maxLength": 500
+                "minLength": 40,
+                "maxLength": 220
             },
             "features": {
                 "type": "array",
@@ -26,8 +26,8 @@ APP_SPEC_JSON_SCHEMA = {
                 "maxItems": 6,
                 "items": {
                     "type": "string",
-                    "minLength": 30,
-                    "maxLength": 200
+                    "minLength": 5,
+                    "maxLength": 40
                 }
             },
             "inputs": {
@@ -37,7 +37,7 @@ APP_SPEC_JSON_SCHEMA = {
                 "items": {
                     "type": "string",
                     "minLength": 1,
-                    "maxLength": 60
+                    "maxLength": 40
                 }
             },
             "outputs": {
@@ -47,7 +47,7 @@ APP_SPEC_JSON_SCHEMA = {
                 "items": {
                     "type": "string",
                     "minLength": 1,
-                    "maxLength": 60
+                    "maxLength": 40
                 }
             },
             "ui_pattern": {
@@ -78,9 +78,9 @@ APP_SPEC_JSON_SCHEMA = {
 
 
 SYSTEM_PROMPT = """
-너는 사용자의 자연어 요청을 구조화된 AppSpec으로 변환하는 AI 기획자다.
+너는 사용자의 자연어 요청을 구조화된 AppSpec으로 변환하는 기획자의 역할.
 
-규칙:
+업무 수행 필수규칙:
 1. 사용자의 요청을 앱 관점에서 해석한다.
 2. features는 핵심 기능만 고른다.
 3. inputs는 사용자가 직접 제공하거나 선택하는 값만 포함한다.
@@ -88,6 +88,13 @@ SYSTEM_PROMPT = """
 5. 내부 구현 단계, 알고리즘 세부 단계, 중복 항목은 제외한다.
 6. title과 summary는 간결하고 이해하기 쉽게 작성한다.
 7. ui_pattern은 가장 적절한 패턴 1개를 선택한다.
+8. 모든 문자열은 자연스러운 한국어로 작성한다.
+9. features, inputs, outputs 각 항목에는 줄바꿈을 넣지 않는다.
+10. features는 짧은 기능 문구로만 작성하고, 설명형 문단으로 쓰지 않는다.
+11. 같은 의미의 항목을 반복하지 않는다.
+12. JSON 외의 메타 텍스트, 설명, 사과문, 코드블록을 절대 포함하지 않는다.
+13. summary는 1~2문장으로만 작성한다.
+14. features의 각 항목은 명사형 또는 짧은 기능구로 작성한다.
 """
 
 # 텍스트에서 JSON 객체를 추출하는 함수 | 텍스트에서 JSON 객체를 추출하여 딕셔너리로 반환
